@@ -18,18 +18,22 @@ class show(object):
         url = self.network + '/' + self.channel
         r = requests.get(url)
         soup = BeautifulSoup(r.content)
-        #div = soup.find('div',{'class':'box'})
-        #a = div.find_all('a')
-        a = soup.find_all('a') #test
+        a = soup.find_all('a')
         
         for links in a:
-            link_check = links['href']
-            if link_check.startswith('/'+ self.channel) and not link_check.startswith('/' + self.channel + '/' + 'page') and link_check.split('/')[-1] != channel and link_check.split('/')[-1] not in blacklist:
+            if links['href'].startswith('/'+ self.channel) and not links['href'].startswith('/' + self.channel + '/' + 'page') and links['href'].split('/')[-1] != self.channel and links['href'].split('/')[-1] not in blacklist:    
                 self.shows.append(self.network + links['href'])
 
     def get_shows(self):
         for a in self.shows:
             print(a)
 
-tdb = show(network, channel)
-tdb.get_shows()
+podcast = show(network, channel)
+#podcast.get_shows()
+
+r =  requests.get(podcast.shows[0])
+soup = BeautifulSoup(r.content)
+links = soup.find_all('a')
+for link in links:
+    if not link['href'].startswith('/') and not link['href'].startswith('/' + channel + '/' + 'page') and link['href'].split('/')[-1] != channel and link['href'].split('/')[-1] not in blacklist:
+        print(link['href'])
