@@ -19,6 +19,9 @@ Shownoter will pull the latest episode from the channels and push the links dire
 
 *You can can block certain sites using the **blacklist**.* You can add keywords or the entire url.
 
+**Known Issues**
+Only shows information from the latest episode. Working to create an interactive selection tool for shows
+
 
 [0]:http://www.crummy.com/software/BeautifulSoup/ "Beautiful Soup"
 [1]:http://docs.python-requests.org/en/latest/ "Requests"
