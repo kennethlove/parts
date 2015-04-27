@@ -6,7 +6,7 @@ import webbrowser
 script, network, channel = argv
 
 
-blacklist = ['feed', 'archive', 'newsletter',channel,'mailto','mp3','podcast', 'store', 'cachefly', 'joyent', 'javascript','wiki','feeds','wealthfront','hover','mailroute','itunes','archeravenue','tweet?url=&original_referer=']
+blacklist = ['feed', 'archive', 'newsletter',channel,'https://www.digitalocean.com/','mailto','mp3','podcast', 'store', 'cachefly', 'joyent', 'javascript','wiki','feeds','wealthfront','hover','mailroute','itunes','archeravenue','tweet?url=&original_referer=']
 
 class show(object):
     def __init__(self, network, channel):
