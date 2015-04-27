@@ -10,13 +10,16 @@ Shownoter utilizes the following tools:
  - [BeautifulSoup4][0]
  - [Requests][1]
  - [Webbrowser][2]
- - [Argv][3]
-
+ 
 **How to Open**
 Run Script followed by the network (Root URL) and the channel. (e.g. shownoter.py http://thisnetwork podcast)
 
 **What does it do**
 Shownoter will pull the latest episode from the channels and push the links directly to your browser. It pauses after 10 links. 
 
-*You can can block certain sites using the **blacklist**.*
+*You can can block certain sites using the **blacklist**.* You can add keywords or the entire url.
 
+
+[0]:http://www.crummy.com/software/BeautifulSoup/ "Beautiful Soup"
+[1]:http://docs.python-requests.org/en/latest/ "Requests"
+[2]:http://pymotw.com/2/webbrowser/index.html "Web Browser"
