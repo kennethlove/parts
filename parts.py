@@ -6,7 +6,8 @@ import webbrowser
 script, network, channel = argv
 
 
-blacklist = ['feed', 'archive', 'newsletter',channel,'mailto']
+blacklist = ['feed', 'archive', 'newsletter',channel,'mailto','mp3','podcast', 'store', 'cachefly', 'joyent', 'javascript','wiki','feeds','wealthfront','hover','mailroute','itunes','archeravenue','tweet?url=&original_referer=']
+
 class show(object):
     def __init__(self, network, channel):
         self.network  = network
@@ -23,7 +24,7 @@ class show(object):
         for links in a:
             if links['href'].startswith('/'+ self.channel) and not links['href'].startswith('/' + self.channel + '/' + 'page') and links['href'].split('/')[-1] != self.channel and links['href'].split('/')[-1] not in blacklist and links['href'].split('//')[-1] not in blacklist:    
                 self.shows.append(self.network + links['href'])
-
+            
     def get_shows(self):
         for a in self.shows:
             print(a)
@@ -34,6 +35,12 @@ podcast = show(network, channel)
 re =  requests.get(podcast.shows[0])
 soup = BeautifulSoup(re.content)
 links = soup.find_all('a')
+count = 0
 for link in links:
-    if not link['href'].startswith('/') and not link['href'].startswith('/' + channel + '/' + 'page') and link['href'].split('/')[-1] != channel and link['href'].split('/')[-1] not in blacklist and not link['href'].split(':')[0] in blacklist and not link['href'].startswith(network) and not network.split('.')[1] in link['href'].split('.'):
-        print(link['href'])
+    if not link['href'].startswith('/') and not link['href'].startswith('/' + channel + '/' + 'page') and link['href'].split('/')[-1] != channel and link['href'].split('/')[-1] not in blacklist and not link['href'].split(':')[0] in blacklist and not link['href'].startswith(network) and not network.split('.')[1] in link['href'].split('.') and not link['href'].split('.')[-1] in blacklist and not link['href'].replace('.','//').split('//')[1] in blacklist:
+        count += 1
+        if count % 10 != 0:
+            print(link['href'])
+            webbrowser.open(link['href'])
+        else:
+            pause = input('Press Enter to Conitnue')    
