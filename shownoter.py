@@ -37,10 +37,10 @@ soup = BeautifulSoup(re.content)
 links = soup.find_all('a')
 count = 0
 for link in links:
-    if not link['href'].startswith('/') and not link['href'].startswith('/' + channel + '/' + 'page') and link['href'].split('/')[-1] != channel and link['href'].split('/')[-1] not in blacklist and not link['href'].split(':')[0] in blacklist and not link['href'].startswith(network) and not network.split('.')[1] in link['href'].split('.') and not link['href'].split('.')[-1] in blacklist and not link['href'].replace('.','//').split('//')[1] in blacklist:
+    if not link['href'].startswith('/') and not link['href'].startswith('/' + channel + '/' + 'page') and link['href'].split('/')[-1] != channel and link['href'].split('/')[-1] not in blacklist and not link['href'].split(':')[0] in blacklist and not link['href'].startswith(network) and not network.split('.')[1] in link['href'].split('.') and not link['href'].split('.')[-1] in blacklist:
         count += 1
         if count % 10 != 0:
-            print(link['href'])
             webbrowser.open(link['href'])
         else:
+	    webbrowser.open(link['href'])    
             pause = input('Press Enter to Conitnue')    
