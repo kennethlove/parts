@@ -1,25 +1,14 @@
-import requests
-from bs4 import BeautifulSoup as soup
-
-networks = {}
-networks['5by5'] = {
-    'url':'http://5by5.tv/',
-    'content_header':'<content_sub1>'
-    }
+class Network:
+    def __init__(self, url, content):
+        self.url = url
+        self.content = content
     
-class show:
-    def __init__(self,name,network,code = ''):
-        self.name = name
-        self.network = network
-        self.code = self.get_code(code)
-        self.url = networks[network]['url'] + self.code
+    def get_podcast_url(self, podcast):
+        return(self.url + podcast)
+
+class Podcast:
+    def __init__(self, url):
+        self.url = url
     
-    def get_code(self,code):
-        if not code:
-            return(self.name)
-        else:
-            return(code)
-
-supercharged = show('supercharged','5by5')
-print(supercharged.url)
-
+fivebyfive = Network('http://5by5.tv/', 'content')
+print(fivebyfive) 
