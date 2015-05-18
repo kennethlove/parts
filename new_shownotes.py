@@ -6,7 +6,7 @@ class Network:
         self.name = name
         self.url = url
         self.class_tag = class_tag
-        self.show_list = {Podcast(x, self.get_url(x), self.get_ep_list(self.get_url(x), x)) for x in show_list}
+        self.show_list = {x:Podcast(x, self.get_url(x), self.get_ep_list(self.get_url(x), x)) for x in show_list}
         
     def __str__(self):
         return(self.name)
@@ -35,4 +35,5 @@ class Podcast:
         self.ep_list = ep_list
 
 fivebyfive = Network('5by5','http://5by5.tv/', 'box', ['dbh', 'b2w', 'supercharged'])      
-print(fivebyfive.show_list['dbh'].url)
+for x in fivebyfive.show_list:
+    print(fivebyfive.show_list[x].url)
