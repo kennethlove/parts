@@ -1,6 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
-from opml import get_opml as opml
+from opml import *
+
+
 
 class Network:
     def __init__(self, name, url, class_tag, show_list):
@@ -35,7 +37,14 @@ class Podcast:
         self.url = url
         self.ep_list = ep_list
 
-cast_raw = opml('overcast.opml')
+filename = 'overcast.opml'
+known_networks = {'5by5.tv':[],
+                      'relay.fm':[],
+                      'rainmaker.fm':[],
+                      }
+    
 
-
-print(podcast_list)
+podcast_list = network_selection(get_opml(filename), known_networks)
+for x in podcast_list:
+    if x != 'misc':
+        print(x, podcast_list[x])
