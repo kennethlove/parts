@@ -5,11 +5,11 @@ from opml import *
 
 
 class Network:
-    def __init__(self, name, url, class_tag, show_list):
-        self.name = name
-        self.url = url
-        self.class_tag = class_tag
-        self.show_list = {x:Podcast(x, self.get_url(x), self.get_ep_list(self.get_url(x), x)) for x in show_list}
+    def __init__(self, name):
+        self.name = name[1]
+        self.url = name[3]
+        self.class_tag = name[2]
+        self.show_list = {x:Podcast(x, self.get_url(x[1]), self.get_ep_list(self.get_url(x[1]), x[1])) for x in name[0]}
         
     def __str__(self):
         return(self.name)
@@ -38,13 +38,10 @@ class Podcast:
         self.ep_list = ep_list
 
 filename = 'overcast.opml'
-known_networks = {'5by5.tv':[],
-                      'relay.fm':[],
-                      'rainmaker.fm':[],
+known_networks = {'5by5.tv':([],'5by5', 'box', 'http://5by5.tv'),
+                      'relay.fm':([],'test'),
+                      'rainmaker.fm':([],'test')
                       }
     
-
 podcast_list = network_selection(get_opml(filename), known_networks)
-for x in podcast_list:
-    if x != 'misc':
-        print(x, podcast_list[x])
+fivebyfive = Network(podcast_list['5by5.tv'])

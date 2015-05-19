@@ -24,7 +24,7 @@ def network_selection(opml, known_networks):
             while opml[url].split('/')[-i] in bad_words:
                 i += 1
             if network in opml[url]:
-                known_networks[network].append((url, opml[url].split('/')[-i]))
+                known_networks[network][0].append((url, opml[url].split('/')[-i]))
             else:
                 known_networks['misc'].append((url, opml[url]))
     return(known_networks)
