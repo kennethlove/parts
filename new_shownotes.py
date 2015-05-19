@@ -9,13 +9,13 @@ class Network:
         self.name = name[1]
         self.url = name[3]
         self.class_tag = name[2]
-        self.show_list = {x:Podcast(x, self.get_url(x[1]), self.get_ep_list(self.get_url(x[1]), x[1])) for x in name[0]}
+        self.show_list = {x[1]:Podcast(x, self.get_url(x[1]), self.get_ep_list(self.get_url(x[1]), x[1])) for x in name[0]}
         
     def __str__(self):
         return(self.name)
     
     def get_url(self, podcast):
-        return(self.url + podcast)
+        return(self.url + '/' + podcast)
        
     def get_ep_list(self, show_url, show_name):
         bad_words = ['page']
@@ -45,3 +45,5 @@ known_networks = {'5by5.tv':([],'5by5', 'box', 'http://5by5.tv'),
     
 podcast_list = network_selection(get_opml(filename), known_networks)
 fivebyfive = Network(podcast_list['5by5.tv'])
+for x in fivebyfive.show_list:
+    print(fivebyfive.show_list[x].ep_list)
