@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+from opml import get_opml as opml
 
 class Network:
     def __init__(self, name, url, class_tag, show_list):
@@ -34,6 +35,7 @@ class Podcast:
         self.url = url
         self.ep_list = ep_list
 
-fivebyfive = Network('5by5','http://5by5.tv/', 'box', ['dbh', 'b2w', 'supercharged'])      
-for x in fivebyfive.show_list:
-    print(fivebyfive.show_list[x].url)
+cast_raw = opml('overcast.opml')
+
+
+print(podcast_list)
