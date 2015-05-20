@@ -9,7 +9,13 @@ class Network:
         self.name = name
         self.class_tag = class_tag
         self.url = url
-        self.show_list = {x[1]: Podcast(x, self.get_url(x[1]), self.get_ep_list(self.get_url(x[1]), x[1])) for x in name[0]}
+        self.show_list = {podcast[1]: Podcast(
+            podcast,
+            self.get_url(podcast[1]),
+            self.get_ep_list(
+                self.get_url(podcast[1]), podcast[1]
+            )) for podcast in podcasts
+        }
         
     def __str__(self):
         return(self.name)
