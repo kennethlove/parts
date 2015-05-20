@@ -18,10 +18,10 @@ class Network:
         }
         
     def __str__(self):
-        return(self.name)
+        return self.name
     
     def get_url(self, podcast):
-        return(self.url + '/' + podcast)
+        return self.url + '/' + podcast
        
     def get_ep_list(self, show_url, show_name):
         bad_words = ['page']
@@ -38,13 +38,15 @@ class Network:
                             show_list.append(link)
                         else:
                             show_list.append(self.url + link)
-        return(show_list)
-        
+        return show_list
+
+
 class Podcast:
     def __init__(self, name, url, ep_list):
         self.name = name
         self.url = url
         self.ep_list = ep_list
+
 
 filename = 'overcast.opml'
 known_networks = {
