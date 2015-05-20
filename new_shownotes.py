@@ -5,11 +5,11 @@ from opml import *
 
 
 class Network:
-    def __init__(self, name):
-        self.name = name[1]
-        self.url = name[3]
-        self.class_tag = name[2]
-        self.show_list = {x[1]:Podcast(x, self.get_url(x[1]), self.get_ep_list(self.get_url(x[1]), x[1])) for x in name[0]}
+    def __init__(self, podcasts, name, class_tag, url):
+        self.name = name
+        self.class_tag = class_tag
+        self.url = url
+        self.show_list = {x[1]: Podcast(x, self.get_url(x[1]), self.get_ep_list(self.get_url(x[1]), x[1])) for x in name[0]}
         
     def __str__(self):
         return(self.name)
@@ -41,14 +41,15 @@ class Podcast:
         self.ep_list = ep_list
 
 filename = 'overcast.opml'
-known_networks = {'5by5.tv':([], '5by5', 'box', 'http://5by5.tv'),
-                      'relay.fm':([], 'relay.fm', 'small-12 medium-8 columns episode__listing', 'http://relay.fm'),
-                      'rainmaker.fm':([], 'rainmaker.fm', 'content-sidebar-wrap', 'http://rainmaker.fm/series')
-                      }
+known_networks = {
+    '5by5.tv':([], '5by5', 'box', 'http://5by5.tv'),
+    'relay.fm':([], 'relay.fm', 'small-12 medium-8 columns episode__listing', 'http://relay.fm'),
+    'rainmaker.fm':([], 'rainmaker.fm', 'content-sidebar-wrap', 'http://rainmaker.fm/series')
+}
 
 podcast_list = network_selection(get_opml(filename), known_networks)
 for network in podcast_list:
     if network != 'misc':
-        cast_network = Network(podcast_list[network])
+        cast_network = Network(*podcast_list[network])
         for x in cast_network.show_list:
             print(cast_network.show_list[x].ep_list)
