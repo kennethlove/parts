@@ -20,13 +20,15 @@ class Podcast:
        return('{}: {}'.format(self.name,self.ep_list))         
 
 
-#defines parameters to pull from opml file
+
+#defines parameters to pull from opml file. Used in get_opml
 def get_markers(line, tag, end_tag):  
     start = line.find(tag) + (len(tag) + 1)
     end = line.find('"',start)
     return(line[start:end])
 
 
+#reads the opml file and generates the Network and Podcast Objects
 def get_opml(filename):
     with open( filename,'r') as file:
         list_temp = (file.read().split('<outline')[1:])
